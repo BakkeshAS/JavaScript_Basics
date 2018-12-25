@@ -1,9 +1,6 @@
 function update(value) {
     //Type the code here.
-	var butValue = value;
-	var inValue = document.getElementById("screen").value;
-	var outValue = inValue + butValue;
-	document.getElementById("screen").value = outValue;
+	document.getElementById("screen").value += value;
 }
 
 function result() {
