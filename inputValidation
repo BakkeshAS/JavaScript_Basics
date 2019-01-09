@@ -1,0 +1,74 @@
+<!--Basic input validation to avoid script injection(XSS) -->
+<!--Use cases: Ctrl + V, Mouse right click paste, Keystroke entry.-->
+<!--This snippet comes in handy when the id attribute of the elements in HTML DOM is dynamically generated.-->
+<!-- Code below is self explanatory -->
+
+<!DOCTYPE html>
+<html>
+<head id="Head1" runat="server">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <title>BakkeshAS</title>
+	<style>
+	.input-align {
+padding-left: 100px;	
+	}
+	label{
+    display: inline-block;
+    float: left;
+    clear: left;
+    width: 150px;
+    text-align: right;
+}
+input {
+  display: inline-block;
+  float: left;
+  
+}
+button {
+margin-left: 254px;
+}
+span{
+color: #a2a9a2;
+}
+	</style>
+    <script>
+	function removeBackslash(){
+    
+	var idBank = document.getElementsByClassName("no-backSlash"),x;
+	var n = idBank.length;
+for (var i = 0; i < n; ++i) 
+ {
+	var ids = idBank[i].id;
+	var str = document.getElementById(ids).value;
+	var num = str.replace(/[^/]/g, "").length;
+	if(num > 0)
+	{
+		for (var cnt = 0;cnt < num; cnt++)
+		{
+			str = str.replace("/", "");
+		}
+	document.getElementById(ids).value = str;
+	}
+ }
+};
+ </script>
+	
+</head>
+<body>
+<div style="padding-left: 26px;">
+<h3>A kind of validation that will not allow backslash so that a script can not be injected</h3>
+</br>
+   <label>First Name:</label> <input type="text" name="name" class="no-backSlash" id="i1" onkeyup="removeBackslash();" onblur="removeBackslash();" title="Enter '/'"/> <span>  * try entering "/" </span>
+   </br></br>
+  <label> Middle Name:</label> <input type="text" name="name" class="no-backSlash" id="i2" onkeyup="removeBackslash();" onblur="removeBackslash();" /><span> * try Ctrl + V </span>
+   </br></br>
+  <label> Last Name:</label> <input type="text" name="name" class="no-backSlash" id="i3"  onkeyup="removeBackslash();" onblur="removeBackslash();"/><span> * try using mouse right click to paste </span>
+   </br></br>
+   <button type="button" class="btn"> Submit</button><span> * click submit </span>
+   </div>
+</body>
+</html>
+
