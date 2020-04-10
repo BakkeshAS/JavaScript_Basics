@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>B.Tech Closure - JS</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+
+<div class="jumbotron text-center">
+    <h1>Closure in JavaScript</h1>
+    <p>Function Scope - Nested Function - Closure</p> 
+  </div>
+    
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <h3>Function Scope</h3>
+        <p>
+            <!-- A lexical scope in JavaScript means that a variable declared outside a function 
+            can be accessible inside another function defined after the variable declaration. 
+            But the opposite is not true.  -->
+            The variable defined inside a function will not be accessible outside that function.</p>
+      </div>
+      <div class="col-sm-4">
+        <h3>Nested Function</h3>
+        <p>A nested function is a function which is defined within another function, the enclosing function.</p>
+        
+      </div>
+      <div class="col-sm-4">
+        <h3>Closure</h3>        
+        <p>Closure is created when a child function keeps the environment of the parent scope even 
+            after the parent function has already executed.</p>
+        
+      </div>
+    </div>
+  </div>
+  <script>
+      //Function Scope
+      //The variable defined inside a function will not be accessible outside that function.
+
+      var gSV = "This is a global scope variable"; // global variable
+
+      function sampleFun(){
+        var fSV = "This is a function scope variable"; // local variable
+        console.log(fSV);
+      };
+
+      //console.log(gSV); 
+      //console.log(fSV);
+
+      //Nested Function
+      //A nested function is a function which is defined within another function, the enclosing function.
+function pF(){
+    var a = 10;
+    function cF(){
+        console.log(a);
+    };
+    cF();
+};
+//pF();
+      //Closure in JS
+      //Closure is created when a child function keeps the environment 
+      //of the parent scope even after the parent function has already executed.
+
+  function drivingEligibility(eligibleAge){
+      var youAre = "You are";
+      var eligible = "and you are eligible to apply for your Driving License.";
+      var youHave = "You have";
+      var toGet = "year/s to get eligiblility for Driving License."
+      return function(yearOfBirth){
+        //eligibleAge = 18; // the value of the outer function variable 
+        //is changed if you change it using inner function as outer function variables are referenced.
+        //console.log(eligibleAge);
+        
+        var dt = new Date();
+        
+        var age = dt.getFullYear() - yearOfBirth;
+        if(age >= eligibleAge)
+        {
+            return (youAre +' '+ age +' '+ eligible);
+        }
+        else
+        {
+            return (youHave +' '+ (eligibleAge - age) +' '+ toGet);
+        }
+      };
+  };
+   //var amIEligible = drivingEligibility(18);
+   //console.log(amIEligible(1993));  // multiple calls to inner function
+//  console.log(amIEligible(1998));
+//  console.log(amIEligible(2003));
+
+//  console.log(drivingEligibility(21)(2010));
+// multiple calls to inner function
+function multiCall(){
+  var temp = 100;
+  return function(){
+temp -= 1;
+console.log(temp);
+  };
+};
+var exp = multiCall();
+//exp();
+//exp();
+//exp();
+//exp();
+  </script>
+    </body>
+</html>
